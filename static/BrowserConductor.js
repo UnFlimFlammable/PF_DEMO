@@ -26,9 +26,40 @@ $(document).ready(function(){
       success: function(data, textStatus, jqXHR){
         $("#loginSidebar").empty();
         $("#loginSidebar").append(data);
+        $(document).prop('title', 'Register | Epiphany');
+
       }
     });
 
+  });
+
+  $(document).on('click', '.account', function(event){
+    $.ajax("htmlFragment?file=accountSummary.html",{
+      success: function(data, textStatus, jqXHR){
+        $("#accountSummary").empty();
+        $("#accountSummary").append(data);
+        var balance = 0;
+
+
+        $("#accountSummaryBalance").text();
+        var table = $("#transactionTable");
+        for(var i = 0; i < currentUser.accounts.length; i++){
+          for(var c = 0; c < currentUser.accounts[i].transactions.length; c++){
+            $("#transactionTable").append("<tr></tr>");
+            var row = $("#transactionTable tr:last");
+            var transaction = currentUser.accounts[i].transactions[c];
+
+            row.append("<td>" + transaction.kind + "</td>");
+            row.append("<td>" + transaction.recipient + "</td>");
+            row.append("<td>" + transaction.description + "</td>");
+            row.append("<td>" + transaction.amount + "</td>");
+            row.append("<td>" + transaction.date + "</td>");
+
+            //TODO Find some way to pass an account into this, look into sending it back in the header
+          }
+        }
+      }
+    });
   });
 
   $(document).on('submit', '#registrationForm', function(event){
@@ -65,4 +96,32 @@ function shakeForm() {
 
 function initBankingApp(){
   //Clear the login screen
+  $("#loginSidebar").remove();
+  $.ajax("htmlFragment?file=bankingApp.html", {
+    success: function(data, textStatus, jqXHR){
+      $("body").append(data);
+      $(document).prop('title', 'Accounts | Epiphany');
+      //Populate the thing
+      $(".welcomeUser").html("Welcome, <br>" + currentUser.userName);
+
+      var summary = $("#accountSummary");
+      //Lay Out Table Header
+      summary.append("<table class = 'mainTable' id='accountTable'><thead> "+
+      "<tr> <td> Account Name </td> <td>Account Type </td> <td> Account Balance </td> </tr>"+
+      "</thead></table>");
+
+      var accountTable = $("#accountTable");
+      for(var i = 0; i < currentUser.accounts.length; i++){
+        var account = currentUser.accounts[i];
+        accountTable.append("<tr class='account'>");
+        var row = $("#accountTable tr:last");
+        row.append("<td>" + account.accountName + "</td>");
+        row.append("<td>" + account.accountType + "</td>");
+        row.append("<td>" + account.balance + "</td>");
+      }
+      //Event bindings etc. here
+
+    }
+
+  });
 }

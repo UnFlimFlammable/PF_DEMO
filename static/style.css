@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Poiret+One);
 @import url(https://fonts.googleapis.com/css?family=Lobster);
 @import url(https://fonts.googleapis.com/css?family=Roboto+Slab);
+@import url(https://fonts.googleapis.com/css?family=Varela+Round);
 
 body{
   background-color: #0A0B19;
@@ -106,7 +107,80 @@ body{
   cursor: pointer;
   background-color: #efefef;
 }
+#root{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+#sidePanel{
+  position: relative;
+  padding: 0;
+  margin: 0;
+  width: 20%;
+  height: 100%;
+  background-color: white;
+  float:left;
+}
 
+#accountSummary{
+  height: 100%;
+  width: 80%;
+  margin-left: 20%;
+  background-color: #efefef;
+  overflow: hidden;
+
+}
+
+.welcomeUser{
+  color: #5f5f5f;
+  padding-right: 3%;
+  margin-top: 0;
+  font-family: "Roboto Slab" cursive;
+  margin-left: 10%;
+}
+
+.mainTable{
+  border: solid 1px #3f3f3f;
+  border-radius: 5px;
+  margin-left: 5%;
+  background-color: #dfdfdf;
+  width: 60%;
+}
+
+.mainTable .account{
+  border-bottom: inset 1px #3f3f3f;
+}
+.mainTable td{
+  font-size:18px;
+  font-family: "Varela Round" cursive;
+}
+
+.mainTable thead td{
+  font-family: "Roboto Slab" cursive;
+  font-size: 24px;
+  background-color: #dfdfdf;
+}
+
+.mainTable .account:hover{
+  background-color: #cfcfcf;
+  border: solid 1px #cfcfcf;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.mainTable tr{
+  border-top: 1pt solid #cfcfcf;
+}
+
+.routeTitle{
+  margin-left: 5%;
+  font-size: 48px;
+  font-family: "Poiret One" cursive;
+  font-weight: light;
+}
+
+#transactionTable{
+  width: 80% !important;
+}
 @-webkit-keyframes badLogin {
 	0% { -webkit-transform: scale(1); }
 	50% { -webkit-transform: scale(0.9); }

@@ -1,0 +1,1 @@
+{"id":0,"userName":"Dwight Eisenhower","password":"a","email":"r","enabled":true,"address":{},"accounts":[{"id":0,"accountType":"Basic Checking","accountName":"Checking","transactions":[{"id":0,"date":"2015-10-23T05:21:55.722Z","description":"Initial Deposit","amount":50,"kind":"Deposit","recipient":"Me"}],"balance":50}]}

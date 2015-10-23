@@ -1,1 +1,1 @@
-{"id":1,"userName":"Cayle Bray","password":"irock","email":"braycayle@gmail.com","enabled":true,"address":{},"accounts":[{"id":1,"accountType":"basic","accountName":"Checking","transactions":[],"balance":0}]}
+{"id":0,"userName":"Cayle Bray","password":"irock","email":"braycayle@gmail.com","enabled":true,"address":{},"accounts":[{"id":0,"accountType":"Basic Checking","accountName":"Checking","transactions":[],"balance":50}]}
