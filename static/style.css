@@ -155,7 +155,8 @@ body{
 }
 
 .mainTable .account{
-  border-bottom: inset 1px #3f3f3f;
+  border-bottom: dashed 1px #3f3f3f;
+  border-collapse: separate;
 }
 .mainTable td{
   font-size:18px;
@@ -193,6 +194,34 @@ body{
 #transactionTable{
   width: 80% !important;
 }
+
+.tableControl{
+  text-align: center;
+}
+
+#addTransactionControls:hover{
+  background-color: #cfcfcf;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#addTransactionControls{
+  border-top: dashed 1px #3f3f3f;
+
+}
+
+#addTransactionControls input{
+  height: 20px;
+  border: 0;
+  background-color: #efefef;
+  border-bottom: solid 1px #dfdfdf;
+  width: 100%;
+}
+#transactionTable tr:last:hover{
+  background-color: #cfcfcf;
+
+}
+
 @-webkit-keyframes badLogin {
 	0% { -webkit-transform: scale(1); }
 	50% { -webkit-transform: scale(0.9); }

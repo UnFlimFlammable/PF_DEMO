@@ -46,6 +46,7 @@ function (Account, Address, Transaction, Transactions, User) {
       });
   
     });
+<<<<<<< HEAD
   
     //click on an account, load the accountSummary.html page
     $(document).on('click', '.account', function(event){
@@ -61,6 +62,24 @@ function (Account, Address, Transaction, Transactions, User) {
           $("#accountSummaryBalance").text();
           var table = $("#transactionTable");
   
+=======
+
+  });
+
+  $(document).on('click', '.account', function(event){
+    var row = this;
+    console.log($(row).attr("AccountJSON"));
+    var account = JSON.parse($(row).attr("AccountJSON"));
+    $.ajax("htmlFragment?file=accountSummary.html",{
+      success: function(data, textStatus, jqXHR){
+        $("#accountSummary").empty();
+        $("#accountSummary").append(data);
+
+
+        $("#accountSummaryBalance").text();
+        var table = $("#transactionTable");
+          account.transactions.reverse();
+>>>>>>> 92b9ab0f68839eb0c5f3fc67d574df58043542f3
           for(var c = 0; c < account.transactions.length; c++){
             $("#transactionTable").append("<tr></tr>");
             var row = $("#transactionTable tr:last");
@@ -74,9 +93,11 @@ function (Account, Address, Transaction, Transactions, User) {
           }
 
           //Append new Column Row to the
-          table.append("<tr></tr>");
+          table.append("<tr id='addTransactionControls'></tr>");
           var row = $("#transactionTable tr:last");
           //Way append new Transaction
+          row.append("<td class='tableControl' colspan='5'>New Transaction</td>");
+
       }
     });
   });
@@ -103,7 +124,19 @@ function (Account, Address, Transaction, Transactions, User) {
     }
   }); //end .on('submit'), '#registrationForm'
 
+  $(document).on('click', '.tableControl', function(event){
+    var controlTD = $(this);
+    controlTD.remove();
+    //Get the input fragment
+    $.ajax("htmlFragment?file=addTransactionFormFragment.html", {
+      success: function(data, textStatus, jqXHR){
+        $("#addTransactionControls").append(data);
+      }
+    });
 
+    //David, use this ajax call to post to the transaction
+
+  });
 
   $(document).on('click', "#registrationBackButton", function(event){
     location.reload();
