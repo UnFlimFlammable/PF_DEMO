@@ -26,9 +26,6 @@ app.get('/login', function(req, res){
     var UserJson = data.toString();
     var User = JSON.parse(UserJson);
 
-    console.log(User.password);
-    console.log(password);
-
     if(User.password.toString() != password.toString()){
       res.send("Error: Incorrect Credentials");
       return;
