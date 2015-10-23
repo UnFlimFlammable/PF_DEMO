@@ -8,7 +8,7 @@ var Transaction = require('./js/Transaction.js');
 
 var app = express();
 app.use(express.static('static'));
-
+app.use(express.static('js'));
 
 //Login WS, returns a Stringified JSON Representation of User
 app.get('/login', function(req, res){

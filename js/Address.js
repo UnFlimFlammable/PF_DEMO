@@ -15,7 +15,6 @@ define(function (require) {
       /** !string */ city,
       /** !string */ state,
       /** !number */ zipCode,
-      /** !string */ street,
       /** !string */ country
      ) {
 
@@ -110,7 +109,7 @@ define(function (require) {
   		return string;
   	};
 
-    module.exports = Address;
+    //module.exports = Address;
 
     return Address;
 
