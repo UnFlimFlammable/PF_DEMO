@@ -222,6 +222,32 @@ body{
 
 }
 
+#sideBarMenu{
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  width: 80%;
+  margin:auto;
+  height: 40%;
+}
+
+#sideBarMenu li{
+  color: #efefef
+  font-size: 18px;
+  border-top: solid 1px #efefef;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#sideBarMenu li:hover{
+  cursor: pointer;
+  color: #cfcfcf;
+}
+
+#AccountSummaryLI{
+  border-top: 0;
+}
+
 @-webkit-keyframes badLogin {
 	0% { -webkit-transform: scale(1); }
 	50% { -webkit-transform: scale(0.9); }

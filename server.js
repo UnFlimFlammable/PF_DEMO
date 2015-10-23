@@ -75,7 +75,7 @@ app.get('/postTransaction',function(req, res){
         if(err){
           res.send("Error: Recipient not found");
           return;
-        } 
+        }
 
         var recipientObject = JSON.parse(data.toString());
         recipientObject.accounts[0].amount += transaction.amount;

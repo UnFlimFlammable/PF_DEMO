@@ -95,6 +95,10 @@ requirejs(['Account', 'Transactions', 'Transaction'], function (Account, Transac
         });//end persistNewUser Ajax call
       }
     }); //end .on('submit'), '#registrationForm'
+    
+    $(document).on('click', '#AccountSummaryLI', function(event){
+      initBankingApp();
+   });
   
     $(document).on('click', '.tableControl', function(event){
       var controlTD = $(this);
