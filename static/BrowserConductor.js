@@ -42,12 +42,11 @@ $(document).ready(function(){
       success: function(data, textStatus, jqXHR){
         $("#accountSummary").empty();
         $("#accountSummary").append(data);
-        var balance = 0;
 
 
         $("#accountSummaryBalance").text();
         var table = $("#transactionTable");
-
+          account.transactions.reverse();
           for(var c = 0; c < account.transactions.length; c++){
             $("#transactionTable").append("<tr></tr>");
             var row = $("#transactionTable tr:last");
@@ -61,9 +60,11 @@ $(document).ready(function(){
           }
 
           //Append new Column Row to the
-          table.append("<tr></tr>");
+          table.append("<tr id='addTransactionControls'></tr>");
           var row = $("#transactionTable tr:last");
           //Way append new Transaction
+          row.append("<td class='tableControl' colspan='5'>New Transaction</td>");
+
       }
     });
   });
@@ -90,7 +91,19 @@ $(document).ready(function(){
     }
   }); //end .on('submit'), '#registrationForm'
 
+  $(document).on('click', '.tableControl', function(event){
+    var controlTD = $(this);
+    controlTD.remove();
+    //Get the input fragment
+    $.ajax("htmlFragment?file=addTransactionFormFragment.html", {
+      success: function(data, textStatus, jqXHR){
+        $("#addTransactionControls").append(data);
+      }
+    });
 
+    //David, use this ajax call to post to the transaction
+
+  });
 
   $(document).on('click', "#registrationBackButton", function(event){
     location.reload();
