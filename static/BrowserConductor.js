@@ -37,7 +37,8 @@ $(document).ready(function(){
   //click on an account, load the accountSummary.html page
   $(document).on('click', '.account', function(event){
     var row = this;
-    console.log(this)
+    console.log($(row).attr("AccountJSON"));
+    var account = JSON.parse($(row).attr("AccountJSON"));
     $.ajax("htmlFragment?file=accountSummary.html",{
       success: function(data, textStatus, jqXHR){
         $("#accountSummary").empty();
@@ -47,11 +48,11 @@ $(document).ready(function(){
 
         $("#accountSummaryBalance").text();
         var table = $("#transactionTable");
-        for(var i = 0; i < currentUser.accounts.length; i++){
-          for(var c = 0; c < currentUser.accounts[i].transactions.length; c++){
+
+          for(var c = 0; c < account.transactions.length; c++){
             $("#transactionTable").append("<tr></tr>");
             var row = $("#transactionTable tr:last");
-            var transaction = currentUser.accounts[i].transactions[c];
+            var transaction = account.transactions[c];
 
             row.append("<td>" + transaction.kind + "</td>");
             row.append("<td>" + transaction.recipient + "</td>");
@@ -61,7 +62,6 @@ $(document).ready(function(){
 
             //TODO Find some way to pass an account into this, look into sending it back in the header
           }
-        }
       }
     });
   });
