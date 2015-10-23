@@ -1,68 +1,46 @@
 // define(['require', 'Account.js'], function (require) {
 //     var Account = require('Account.js');
 // });
-require(["Account.js", "Address.js", "Transaction.js", "Transactions.js", "User.js"], 
-function (Account, Address, Transaction, Transactions, User) {
+// require(["Account.js", "Address.js", "Transaction.js", "Transactions.js", "User.js"], 
+// function (Account, Address, Transaction, Transactions, User) {
 
-  console.log("hell");
+//   console.log("hell");
   // var account = new Account();
   // console.log(account.accountType);
   
-  
-  var currentUser = {};
-  var selectedAccount = {};
-  $(document).ready(function(){
-    $("#loginForm").submit(function(event){
-      event.preventDefault();
-  
-      $.ajax("login?email="+$("#email").val()+"&password="+$("#password").val(),{
-        
-        success: function(data, textStatus, jqXHR){
-          if(data==="Error: User Not Found"){
-            shakeForm("#loginForm");
-          }else if(data==="Error: Incorrect Credentials"){
-            shakeForm("#loginForm");
-          }else{
-            currentUser = JSON.parse(data);
-            initBankingApp();
-          }
-        },
-  
-        error: function(jqXHR, textStatus, errorThrown){
-          alert("Server Error Occured");
+var currentUser = {};
+var selectedAccount = {};
+$(document).ready(function(){
+  $("#loginForm").submit(function(event){
+    event.preventDefault();
+
+    $.ajax("login?email="+$("#email").val()+"&password="+$("#password").val(),{
+      success: function(data, textStatus, jqXHR){
+        if(data==="Error: User Not Found"){
+          shakeForm("#loginForm");
+        }else if(data==="Error: Incorrect Credentials"){
+          shakeForm("#loginForm");
+        }else{
+          currentUser = JSON.parse(data);
+          initBankingApp();
         }
-      });
+      },
+
+      error: function(jqXHR, textStatus, errorThrown){
+        alert("Server Error Occured");
+      }
     });
-  
-    $("#registerLink").click(function(event){
-      $.ajax("htmlFragment?file=registration.html", {
-        
-        success: function(data, textStatus, jqXHR){
-          $("#loginSidebar").empty();
-          $("#loginSidebar").append(data);
-          $(document).prop('title', 'Register | Epiphany');
-  
-        }
-      });
-  
+  });
+
+  $("#registerLink").click(function(event){
+    $.ajax("htmlFragment?file=registration.html", {
+      success: function(data, textStatus, jqXHR){
+        $("#loginSidebar").empty();
+        $("#loginSidebar").append(data);
+        $(document).prop('title', 'Register | Epiphany');
+
+      }
     });
-<<<<<<< HEAD
-  
-    //click on an account, load the accountSummary.html page
-    $(document).on('click', '.account', function(event){
-      var row = this;
-      console.log($(row).attr("AccountJSON"));
-      var account = JSON.parse($(row).attr("AccountJSON"));
-      $.ajax("htmlFragment?file=accountSummary.html",{
-        
-        success: function(data, textStatus, jqXHR){
-          $("#accountSummary").empty();
-          $("#accountSummary").append(data);
-  
-          $("#accountSummaryBalance").text();
-          var table = $("#transactionTable");
-  
-=======
 
   });
 
@@ -79,12 +57,11 @@ function (Account, Address, Transaction, Transactions, User) {
         $("#accountSummaryBalance").text();
         var table = $("#transactionTable");
           account.transactions.reverse();
->>>>>>> 92b9ab0f68839eb0c5f3fc67d574df58043542f3
           for(var c = 0; c < account.transactions.length; c++){
             $("#transactionTable").append("<tr></tr>");
             var row = $("#transactionTable tr:last");
             var transaction = account.transactions[c];
-  
+
             row.append("<td>" + transaction.kind + "</td>");
             row.append("<td>" + transaction.recipient + "</td>");
             row.append("<td>" + transaction.description + "</td>");
@@ -108,9 +85,7 @@ function (Account, Address, Transaction, Transactions, User) {
     var email = $("#registerEmail").val();
     var password = $("#registerPassword").val();
 
-    var validationResult = validateRegistrationForm(user, email, password);
-
-    if(validationResult) {
+    if(validateRegistrationForm(user, email, password)) {
       $.ajax("/persistNewUser?user="+user+"&email="+email+"&password="+password, {
         success: function(data, textStatus, jqXHR){
           if(data === "Success"){
@@ -187,29 +162,29 @@ function initBankingApp(){
   });
 } //end initBankingApp
 
-  //validates the Registration Form with Regex
-  function validateRegistrationForm(user, email, password) {
-    var regexResult = true;
-  
-    var emailRegex = new RegExp("^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
-    var userRegex = new RegExp("\w\w{2,16}[^+,:;=|' <>^()\[\]\\/\{\}-]");
-    var passwordRegex = new RegExp("\w\w{8,16}[^+,:;=|' <>^()\[\]\\/\{\}-]");
-  
-    if (!emailRegex.exec(email)) {
-      console.log("email failed the test");
-      regexResult = false;
-    } else if (!userRegex.exec(user)) {
-      console.log("user failed the test");
-      regexResult = false;
-    } else if (!passwordRegex.exec(password)) {
-      console.log("user failed the test");
-      regexResult = false;
-    } else if (!regexResult) {
-      shakeForm();
-    }
-  
-    return regexResult;
+//validates the Registration Form with Regex
+function validateRegistrationForm(user, email, password) {
+  var regexResult = true;
+
+  var emailRegex = new RegExp("^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+  var userRegex = new RegExp("\w\w{2,16}[^+,:;=|' <>^()\[\]\\/\{\}-]");
+  var passwordRegex = new RegExp("\w\w{8,16}[^+,:;=|' <>^()\[\]\\/\{\}-]");
+
+  if (!emailRegex.exec(email)) {
+    console.log("email failed the test");
+    regexResult = false;
+  } else if (!userRegex.exec(user)) {
+    console.log("user failed the test");
+    regexResult = false;
+  } else if (!passwordRegex.exec(password)) {
+    console.log("user failed the test");
+    regexResult = false;
+  } else if (!regexResult) {
+    shakeForm();
   }
 
-});
+  return regexResult;
+}
+
+// });
 
