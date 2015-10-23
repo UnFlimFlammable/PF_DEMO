@@ -58,9 +58,12 @@ $(document).ready(function(){
             row.append("<td>" + transaction.description + "</td>");
             row.append("<td>" + transaction.amount + "</td>");
             row.append("<td>" + transaction.date + "</td>");
-
-            //TODO Find some way to pass an account into this, look into sending it back in the header
           }
+
+          //Append new Column Row to the
+          table.append("<tr></tr>");
+          var row = $("#transactionTable tr:last");
+          //Way append new Transaction
       }
     });
   });
@@ -70,9 +73,9 @@ $(document).ready(function(){
     var user = $("#registerName").val();
     var email = $("#registerEmail").val();
     var password = $("#registerPassword").val();
-    
+
     var validationResult = validateRegistrationForm(user, email, password);
-    
+
     if(validationResult) {
       $.ajax("/persistNewUser?user="+user+"&email="+email+"&password="+password, {
         success: function(data, textStatus, jqXHR){
@@ -86,7 +89,7 @@ $(document).ready(function(){
       });//end persistNewUser Ajax call
     }
   }); //end .on('submit'), '#registrationForm'
-  
+
 
 
   $(document).on('click', "#registrationBackButton", function(event){
@@ -110,12 +113,12 @@ function initBankingApp(){
     success: function(data, textStatus, jqXHR){
       $("body").append(data);
       $(document).prop('title', 'Accounts | Epiphany');
-      
+
       //Populate the thing
       $(".welcomeUser").html("Welcome, <br>" + currentUser.userName);
 
       var summary = $("#accountSummary");
-      
+
       //Lay Out Table Header
       summary.append("<table class = 'mainTable' id='accountTable'><thead> "+
       "<tr> <td> Account Name </td> <td>Account Type </td> <td> Account Balance </td> </tr>"+
@@ -131,7 +134,7 @@ function initBankingApp(){
         row.append("<td>" + account.balance + "</td>");
         row.attr("accountJSON", JSON.stringify(account));
       }
-      
+
       //Event bindings etc. here
 
     }
@@ -139,5 +142,5 @@ function initBankingApp(){
 } //end initBankingApp
 
 function validateRegistrationForm(user, email, password) {
-  
+
 }
