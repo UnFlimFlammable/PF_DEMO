@@ -87,16 +87,16 @@ define(function (require) {
         }
       });
 
-      // this.toJSON = function () {
-      //     return {
-      //         id: this.id,
-      //         date: this.date,
-      //         description: this.description,
-      //         amount: this.amount,
-      //         kind: this.kind,
-      //         recipient: this.recipient
-      //     };
-      // };
+      this.toJSON = function () {
+          return {
+              id: this.id,
+              date: this.date,
+              description: this.description,
+              amount: this.amount,
+              kind: this.kind,
+              recipient: this.recipient
+          };
+      };
 
       // this.prototype.transferToRecipient = function(AccountFrom, AccountTo){
       //     //Pass this transaction object to a web service that will post and return a success / fail

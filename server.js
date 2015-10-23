@@ -8,7 +8,7 @@ var Transaction = require('./js/Transaction.js');
 
 var app = express();
 app.use(express.static('static'));
-app.use(express.static('js'));
+// app.use(express.static('js'));
 
 //Login WS, returns a Stringified JSON Representation of User
 app.get('/login', function(req, res){
@@ -51,9 +51,10 @@ app.get("/htmlFragment", function(req, res){
 });
 
 app.get('/postTransaction',function(req, res){
-  var userFromEmail = JSON.parse(req.query.userFromEmail);
-  var userFromPassword = JSON.parse(req.query.userFromPassword);
+  var userFromEmail = req.query.userFromEmail;
+  var userFromPassword = req.query.userFromPassword;
   var transaction = JSON.parse(req.query.transaction);
+
   fs.readFile("data/users/"+userFromEmail.replace(/@/,"_"), function(err, data){
     if(err){
       res.send("Error: User Not Found");
@@ -102,7 +103,7 @@ app.get('/postTransaction',function(req, res){
           console.log("Updated User: "+ sender.email)
         });
       });
-    }else if(transaction.kind === "Deposit"){
+    } else if (transaction.kind === "Deposit") {
       sender.accounts[0].amount += transaction.amount;
       sender.accounts[0].transactions.push(new Transaction(new Date(), "Deposit", transaction.amount, undefined, "Deposit"));
 
@@ -113,7 +114,7 @@ app.get('/postTransaction',function(req, res){
         }
         console.log("Updated User: "+ sender.email)
       });
-    }else if(transaction.kind === "Withdrawal"){
+    } else if (transaction.kind === "Withdrawal") {
       sender.accounts[0].amount -= transaction.amount;
       sender.accounts[0].transactions.push(new Transaction(new Date(), "Withdrawal", transaction.amount, undefined, "Withdrawal"));
 
@@ -130,7 +131,7 @@ app.get('/postTransaction',function(req, res){
 
 });
 
-app.get('/persistNewUser', function(req, res){
+app.get('/persistNewUser', function(req, res) {
   var user = req.query.user;
   var email = req.query.email;
   var password = req.query.password;

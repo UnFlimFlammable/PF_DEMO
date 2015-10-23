@@ -18,7 +18,7 @@ define(function (require) {
         var transactions = transactions;
         var balance = 50;
 
-        transactions.push(new Transaction(new Date(), "Initial Deposit", 50, "Me", "Deposit"));
+        transactions.add(new Transaction(new Date(), "Initial Deposit", 50, "Me", "Deposit"));
         Object.defineProperty(this, "id", {
             get: function () { return id; }
         });
