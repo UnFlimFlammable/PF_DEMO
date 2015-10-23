@@ -1,0 +1,1 @@
+{"id":0,"userName":"David Sexy","password":"renegades","email":"david.riott1@gmail.com","enabled":true,"address":{},"accounts":[{"id":0,"accountType":"Basic Checking","accountName":"Checking","transactions":[{"id":0,"date":"2015-10-23T16:10:42.403Z","description":"Initial Deposit","amount":50,"kind":"Deposit","recipient":"Me"}],"balance":50}]}

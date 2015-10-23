@@ -34,6 +34,7 @@ $(document).ready(function(){
 
   });
 
+  //click on an account, load the accountSummary.html page
   $(document).on('click', '.account', function(event){
     var row = this;
     console.log(this)
@@ -139,5 +140,6 @@ function initBankingApp(){
 } //end initBankingApp
 
 function validateRegistrationForm(user, email, password) {
-  
+  //
+  return true;
 }

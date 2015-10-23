@@ -89,6 +89,12 @@ body{
   color: #9f9f9f;
 }
 
+.submitButton{
+  border: 0;
+  margin-top: 10%;
+  color: #efefef;
+}
+
 #registrationBackButton{
   border: 0;
   background-color: inherit;
@@ -107,10 +113,12 @@ body{
   cursor: pointer;
   background-color: #efefef;
 }
+
 #root{
   margin-left: 5%;
   margin-right: 5%;
 }
+
 #sidePanel{
   position: relative;
   padding: 0;
@@ -169,6 +177,10 @@ body{
 
 .mainTable tr{
   border-top: 1pt solid #cfcfcf;
+}
+
+.mainTable td {
+  padding: 1%
 }
 
 .routeTitle{
