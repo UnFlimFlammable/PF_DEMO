@@ -1,4 +1,5 @@
 var currentUser = {};
+var selectedAccount = {};
 $(document).ready(function(){
   $("#loginForm").submit(function(event){
     event.preventDefault();
@@ -6,9 +7,9 @@ $(document).ready(function(){
     $.ajax("login?email="+$("#email").val()+"&password="+$("#password").val(),{
       success: function(data, textStatus, jqXHR){
         if(data==="Error: User Not Found"){
-          shakeForm();
+          shakeForm("#loginForm");
         }else if(data==="Error: Incorrect Credentials"){
-          shakeForm();
+          shakeForm("#loginForm");
         }else{
           currentUser = JSON.parse(data);
           initBankingApp();
@@ -34,6 +35,8 @@ $(document).ready(function(){
   });
 
   $(document).on('click', '.account', function(event){
+    var row = this;
+    console.log(this)
     $.ajax("htmlFragment?file=accountSummary.html",{
       success: function(data, textStatus, jqXHR){
         $("#accountSummary").empty();
@@ -56,6 +59,7 @@ $(document).ready(function(){
             row.append("<td>" + transaction.date + "</td>");
 
             //TODO Find some way to pass an account into this, look into sending it back in the header
+            row.attr("account", JSON.stringify(accounts[i]));
           }
         }
       }
@@ -85,10 +89,10 @@ $(document).ready(function(){
   });
 });
 
-function shakeForm() {
+function shakeForm(selector) {
    var l = 20;
    for( var i = 0; i < 10; i++ )
-     $( "#loginForm" ).animate( {
+     $( selector ).animate( {
          'margin-left': "+=" + ( l = -l ) + 'px',
          'margin-right': "-=" + l + 'px'
       }, 50);
@@ -118,6 +122,7 @@ function initBankingApp(){
         row.append("<td>" + account.accountName + "</td>");
         row.append("<td>" + account.accountType + "</td>");
         row.append("<td>" + account.balance + "</td>");
+        row.attr("accountJSON", JSON.stringify(account));
       }
       //Event bindings etc. here
 
