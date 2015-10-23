@@ -90,6 +90,10 @@ $(document).ready(function(){
       });//end persistNewUser Ajax call
     }
   }); //end .on('submit'), '#registrationForm'
+  $(document).on('click', '#AccountSummaryLI', function(event){
+    initBankingApp();
+
+  });
 
   $(document).on('click', '.tableControl', function(event){
     var controlTD = $(this);

@@ -51,8 +51,8 @@ app.get("/htmlFragment", function(req, res){
 });
 
 app.get('/postTransaction',function(req, res){
-  var userFromEmail = JSON.parse(req.query.userFromEmail);
-  var userFromPassword = JSON.parse(req.query.userFromPassword);
+  var userFromEmail = req.query.userFromEmail;
+  var userFromPassword = req.query.userFromPassword;
   var transaction = JSON.parse(req.query.transaction);
   fs.readFile("data/users/"+userFromEmail.replace(/@/,"_"), function(err, data){
     if(err){
@@ -74,7 +74,7 @@ app.get('/postTransaction',function(req, res){
         if(err){
           res.send("Error: Recipient not found");
           return;
-        } 
+        }
 
         var recipientObject = JSON.parse(data.toString());
         recipientObject.accounts[0].amount += transaction.amount;
