@@ -1,0 +1,1 @@
+{"id":2,"userName":"David Riott","password":"isuck","email":"driott@gmail.com","enabled":true,"address":{},"accounts":[{"id":2,"accountType":"basic","accountName":"Checking","transactions":[],"balance":0}]}
