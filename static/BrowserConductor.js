@@ -59,7 +59,6 @@ $(document).ready(function(){
             row.append("<td>" + transaction.date + "</td>");
 
             //TODO Find some way to pass an account into this, look into sending it back in the header
-            row.attr("account", JSON.stringify(accounts[i]));
           }
         }
       }
